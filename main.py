@@ -19,5 +19,6 @@ for line in csv:
         continue
     crawler.save_screenshot(querry, out_dir)
     print("JOB Number " + str(count) + " Done.\n>>>>>" + querry)
+    count += 1
 
-#crawler.kill()
+crawler.kill()
