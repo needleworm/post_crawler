@@ -1,14 +1,23 @@
 import post_crawler as pc
 
 feed_csv = "feed.csv"
+out_dir = "output"
 
-open(feed_csv)
+csv = open(feed_csv)
 count = 1
 
-for line in feed_csv:
-    querry = line.strip()[:-1]
+crawler = pc.crawler()
+
+for line in csv:
+    querry = line.strip()
+    if "-" in querry:
+        splt = querry.split("-")
+        querry = ""
+        for el in splt:
+            querry = querry + el
     if len(querry) != 13 or not querry.isdigit():
         continue
-
-    pc.save_screenshot(querry)
+    crawler.save_screenshot(querry, out_dir)
     print("JOB Number " + str(count) + " Done.\n>>>>>" + querry)
+
+#crawler.kill()
