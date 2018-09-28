@@ -3,3 +3,4 @@ __pycache__
 output
 output_without_masking
 feed.csv
+errored_ids.txt
