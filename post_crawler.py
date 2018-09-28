@@ -44,13 +44,14 @@ class crawler():
         popup_ok_location = (210, 310)
 
         click(button_location)
-        if not redbox_based_sleep():
-            return False
+        redbox_based_sleep()
         click(key1_location)
         type_in(key1)
         click(key2_location)
         type_in(key2)
         click(popup_ok_location)
+        if kill_error_page():
+            return False
         return True
 
 
@@ -77,20 +78,21 @@ def get_color(location):
 
 def redbox_based_sleep():
     redbox_location = (385, 123)
-    error_button = (390, 170)
-    count = 5
     while get_color(redbox_location) != "0x392ddd":
         time.sleep(0.01)
-        count += 0.01
-        if get_color(error_button) == "0xf48542":
-            return False
-    if count == 5:
-        return False
-    else:
-        return True
 
 
 def redbox_based_awake():
     redbox_location = (385, 123)
     while get_color(redbox_location) == "0x392ddd":
         time.sleep(0.1)
+
+
+def kill_error_page():
+    error_button = (390, 170)
+    quit_button = (400, 10)
+    time.sleep(0.2)
+    if get_color(error_button) != "0xffffff":
+        click(quit_button)
+        return True
+    return False

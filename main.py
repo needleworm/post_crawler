@@ -11,6 +11,7 @@ crawler = pc.crawler()
 
 done_list = []
 temp = os.listdir(out_dir)
+
 for el in temp:
     if ".png" in el:
         done_list.append(el)
@@ -39,7 +40,8 @@ for line in csv:
     if querry + ".png" in done_list:
         continue
 
-    crawler.save_screenshot_withhout_masking(querry, out_dir, key1, key2)
+    if not crawler.save_screenshot_withhout_masking(querry, out_dir, key1, key2):
+        continue
     print("JOB Number " + str(count) + " Done.\n>>>>>" + querry)
     count += 1
 
