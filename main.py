@@ -23,12 +23,9 @@ for line in csv:
 
     querry = line_split[0].strip()
     key2 = line_split[1].strip()
-    if key2[0] == "㈜":
-        key2 = "주"
-    else:
-        if len(key2) < 2:
-            continue
-        key2 = key2[1]
+    if len(key2) < 2:
+        continue
+    key2 = key2[1]
     key1 = "구"
 
     if "-" in querry:
