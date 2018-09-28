@@ -91,7 +91,7 @@ def redbox_based_awake():
 def kill_error_page():
     error_button = (390, 170)
     quit_button = (400, 10)
-    time.sleep(0.2)
+    time.sleep(1)
     if get_color(error_button) != "0xffffff":
         click(quit_button)
         return True
