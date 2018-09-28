@@ -49,6 +49,7 @@ class crawler():
         type_in(key1)
         click(key2_location)
         type_in(key2)
+        time.sleep(0.1)
         click(popup_ok_location)
         if kill_error_page():
             return False

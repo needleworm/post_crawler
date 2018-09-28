@@ -1,11 +1,13 @@
 import post_crawler as pc
 import os
+import time
 
 feed_csv = "feed.csv"
 out_dir = "output_without_masking"
 
 csv = open(feed_csv)
 count = 1
+
 
 crawler = pc.crawler()
 
@@ -27,6 +29,8 @@ for line in csv:
         continue
     key2 = key2[1]
     key1 = "구"
+    if len(key2) != 1:
+        continue
 
     if "-" in querry:
         splt = querry.split("-")
@@ -39,10 +43,20 @@ for line in csv:
 
     if querry + ".png" in done_list:
         continue
-
-    if not crawler.save_screenshot_withhout_masking(querry, out_dir, key1, key2):
+    try:
+        if not crawler.save_screenshot_withhout_masking(querry, out_dir, key1, key2):
+            print(str(querry) + " has wrong information")
+            out_log = "line was      " + line + "key2 was    " + key2 + "\n\n"
+            print(out_log)
+            error_log = open("errored_ids.txt", "a")
+            error_log.write(out_log)
+            error_log.close()
+            continue
+    except:
+        print(str(querry) + " showed error")
         continue
-    print("JOB Number " + str(count) + " Done.\n>>>>>" + querry)
+    #print("JOB Number " + str(count) + " Done.\n>>>>>" + querry)
     count += 1
 
+error_log.close()
 crawler.kill()
