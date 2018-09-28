@@ -30,9 +30,11 @@ class crawler():
     def save_screenshot_withhout_masking(self, querry, out_dir, key1, key2):
         url = make_url(querry)
         self.driver.get(url)
-        self.unlock_masking(key1, key2)
+        if not self.unlock_masking(key1, key2):
+            return False
         redbox_based_awake()
         self.driver.save_screenshot(out_dir + "/"+querry + ".png")
+        return True
 
     def unlock_masking(self, key1, key2):
         button_location = (650, 170)
@@ -42,12 +44,14 @@ class crawler():
         popup_ok_location = (210, 310)
 
         click(button_location)
-        redbox_based_sleep()
+        if not redbox_based_sleep():
+            return False
         click(key1_location)
         type_in(key1)
         click(key2_location)
         type_in(key2)
         click(popup_ok_location)
+        return True
 
 
 def click(location):
@@ -73,8 +77,17 @@ def get_color(location):
 
 def redbox_based_sleep():
     redbox_location = (385, 123)
+    error_button = (390, 170)
+    count = 5
     while get_color(redbox_location) != "0x392ddd":
         time.sleep(0.01)
+        count += 0.01
+        if get_color(error_button) == "0xf48542":
+            return False
+    if count == 5:
+        return False
+    else:
+        return True
 
 
 def redbox_based_awake():
