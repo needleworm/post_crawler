@@ -8,7 +8,7 @@ out_dir = "output_without_masking"
 csv = open(feed_csv)
 count = 1
 
-if out_dir not in os.lostdir():
+if out_dir not in os.listdir():
     os.mkdir(out_dir)
 
 crawler = pc.crawler()
