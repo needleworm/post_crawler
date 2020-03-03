@@ -3,6 +3,14 @@
 https://brunch.co.kr/@needleworm/1
 
 
+30분만에 만든 코드이므로 개선의 여지가 많습니다.
+
+실전에서 사용하시고자 한다면 PyWinMacro를 활용하여 개선하여 사용하시기 바랍니다.
+
+
+>https://github.com/needleworm/pywinmacro
+
+
 #AUTHOR
 >Byunghyun Ban
 * CTO of Imagination Garden Inc. (2018~)
